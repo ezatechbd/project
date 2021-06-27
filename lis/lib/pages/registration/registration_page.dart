@@ -1,5 +1,7 @@
 import 'dart:developer';
 import 'dart:ui';
+import 'package:ati_lis/model/form_validation_model.dart';
+import 'package:ati_lis/model/form_validation_service.dart';
 import 'package:ati_lis/pages/registration/TextFields/password_field.dart';
 import 'package:ati_lis/pages/registration/TextFields/work_place.dart';
 import 'package:ati_lis/pages/registration/drop_downs/select_birth_day.dart';
@@ -39,6 +41,58 @@ class _RegistrationPageState extends State<RegistrationPage> {
   bool _autoValidate = false;
   bool nextPage = false;
   bool isChecked = false;
+
+  //form validation from backend
+  // List<FormValidation> formData = [];
+  List<FormValidation> checkUserName = [];
+  List<FormValidation> checkUserAge = [];
+  List<FormValidation> checkUserBirthDay = [];
+  List<FormValidation> checkUserBirthMonth = [];
+  List<FormValidation> checkUserBirthYear = [];
+  List<FormValidation> checkUserAddress = [];
+  List<FormValidation> checkUserMobile = [];
+  List<FormValidation> checkUserEmail = [];
+  List<FormValidation> checkUserNid = [];
+  List<FormValidation> checkUserDepartment = [];
+  List<FormValidation> checkUserRank = [];
+  List<FormValidation> checkUserJobStatus = [];
+  List<FormValidation> checkUserWorkPlace = [];
+  List<FormValidation> checkUserPassword = [];
+  var isLoading = true;
+
+  @override
+  void initState() {
+    FormValidationService().fetchFormData().then((data) {
+      setState(() {
+        // formData = data;
+        isLoading = false;
+        checkUserName = data.where((value) => value.fuid == 'FNM01').toList();
+        checkUserAge = data.where((value) => value.fuid == 'FNM02').toList();
+        checkUserBirthDay =
+            data.where((value) => value.fuid == 'FNM03').toList();
+        checkUserBirthMonth =
+            data.where((value) => value.fuid == 'FNM04').toList();
+        checkUserBirthYear =
+            data.where((value) => value.fuid == 'FNM05').toList();
+        checkUserAddress =
+            data.where((value) => value.fuid == 'FNM06').toList();
+        checkUserMobile = data.where((value) => value.fuid == 'FNM07').toList();
+        checkUserEmail = data.where((value) => value.fuid == 'FNM08').toList();
+        checkUserNid = data.where((value) => value.fuid == 'FNM09').toList();
+        checkUserDepartment =
+            data.where((value) => value.fuid == 'FNM10').toList();
+        checkUserRank = data.where((value) => value.fuid == 'FNM11').toList();
+        checkUserJobStatus =
+            data.where((value) => value.fuid == 'FNM12').toList();
+        checkUserWorkPlace =
+            data.where((value) => value.fuid == 'FNM13').toList();
+        checkUserPassword =
+            data.where((value) => value.fuid == 'FNM14').toList();
+      });
+      log(checkUserName[0].isVisible.toString());
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,267 +139,286 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   padding: EdgeInsets.all(12.0),
                   decoration: BoxDecoration(
                       color: Colors.grey.shade200.withOpacity(0.5)),
-                  child: SingleChildScrollView(
-                    child: Form(
-                      key: _formKey,
-                      // ignore: deprecated_member_use
-                      autovalidate: _autoValidate,
-                      child: !nextPage
-                          ? Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Sign Up',
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  'It’s quick and easy.',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.black.withOpacity(0.6),
-                                  ),
-                                ),
-                                NameField(
-                                    autoValidate: _autoValidate,
-                                    nameController: nameController),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 8.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'Birthday',
-                                            style: textStyle,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                'Age',
-                                                style: textStyle,
-                                              ),
-                                              Checkbox(
-                                                  value: isChecked,
-                                                  onChanged: (value) {
-                                                    setState(() {
-                                                      isChecked = value;
-                                                    });
-                                                  }),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    !isChecked
-                                        ? Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              SelectBirthDay(),
-                                              SelectBirthMonth(),
-                                              SelectBirthYear(),
-                                            ],
-                                          )
-                                        : AgeField(
-                                            autoValidate: _autoValidate,
-                                            ageController: ageController),
-                                  ],
-                                ),
-                                Container(
-                                  padding: EdgeInsets.only(top: 10.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 5.0),
-                                            child: Text(
-                                              'Gender',
-                                              style: textStyle,
-                                            ),
-                                          ),
-                                          SelectGender(),
-                                        ],
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 5.0),
-                                            child: Text(
-                                              'Marital Status',
-                                              style: textStyle,
-                                            ),
-                                          ),
-                                          SelectMaritialStatus(),
-                                        ],
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 5.0),
-                                            child: Text(
-                                              'Blood Group',
-                                              style: textStyle,
-                                            ),
-                                          ),
-                                          SelectBloodGroup(),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                AddressField(
-                                    autoValidate: _autoValidate,
-                                    addressController: addressController),
-                                MobileNumberField(
-                                    autoValidate: _autoValidate,
-                                    phoneController: phoneController),
-                                EmailField(
-                                    autoValidate: _autoValidate,
-                                    emailController: emailController),
-                                NidField(
-                                    autoValidate: _autoValidate,
-                                    nidController: nidController),
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Container(
-                                    width: 89,
-                                    padding: EdgeInsets.only(top: 8.0),
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        if (_formKey.currentState.validate()) {
-                                          //log works only if all fields are validate. Fill all the required fields
-                                          log(nameController.text);
-                                          setState(() {
-                                            nextPage = true;
-                                          });
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
-                                                  content:
-                                                      Text('Final steps')));
-                                          _formKey.currentState.save();
-                                        } else {
-                                          setState(() {
-                                            _autoValidate = true;
-                                          });
-                                        }
-                                      },
-                                      child: Row(
-                                        children: [
-                                          Text('Next '),
-                                          Icon(Icons.arrow_forward_outlined)
-                                        ],
-                                      ),
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                                Colors.green),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
-                          : Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SelectDepartmentRank(),
-                                  Column(
+                  child: isLoading
+                      ? Center(child: CircularProgressIndicator())
+                      : SingleChildScrollView(
+                          child: Form(
+                            key: _formKey,
+                            // ignore: deprecated_member_use
+                            autovalidate: _autoValidate,
+                            child: !nextPage
+                                ? Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            bottom: 5.0, top: 15.0),
-                                        child: Text(
-                                          'Job Status',
-                                          style: textStyle,
+                                      Text(
+                                        'Sign Up',
+                                        style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      SelectJobStatus(),
-                                    ],
-                                  ),
-                                  WorkPlace(
-                                      autoValidate: _autoValidate,
-                                      workPlaceController: workPlaceController),
-                                  PasswordField(
-                                      autoValidate: _autoValidate,
-                                      passwordController: passwordController),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            nextPage = false;
-                                          });
-                                        },
+                                      Text(
+                                        'It’s quick and easy.',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.black.withOpacity(0.6),
+                                        ),
+                                      ),
+                                      checkUserName[0].isVisible.toString() ==
+                                              '1'
+                                          ? NameField(
+                                              autoValidate: _autoValidate,
+                                              nameController: nameController)
+                                          : Container(),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 8.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  'Birthday',
+                                                  style: textStyle,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      'Age',
+                                                      style: textStyle,
+                                                    ),
+                                                    Checkbox(
+                                                        value: isChecked,
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            isChecked = value;
+                                                          });
+                                                        }),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          !isChecked
+                                              ? Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    SelectBirthDay(),
+                                                    SelectBirthMonth(),
+                                                    SelectBirthYear(),
+                                                  ],
+                                                )
+                                              : AgeField(
+                                                  autoValidate: _autoValidate,
+                                                  ageController: ageController),
+                                        ],
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(top: 10.0),
                                         child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Icon(Icons.arrow_back_outlined),
-                                            Text(' Prev'),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 5.0),
+                                                  child: Text(
+                                                    'Gender',
+                                                    style: textStyle,
+                                                  ),
+                                                ),
+                                                SelectGender(),
+                                              ],
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 5.0),
+                                                  child: Text(
+                                                    'Marital Status',
+                                                    style: textStyle,
+                                                  ),
+                                                ),
+                                                SelectMaritialStatus(),
+                                              ],
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 5.0),
+                                                  child: Text(
+                                                    'Blood Group',
+                                                    style: textStyle,
+                                                  ),
+                                                ),
+                                                SelectBloodGroup(),
+                                              ],
+                                            ),
                                           ],
                                         ),
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.green),
-                                        ),
                                       ),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          if (_formKey.currentState
-                                              .validate()) {
-                                            //log works only if all fields are validate. Fill all the required fields
-                                            log(nameController.text);
-                                            log(SelectDepartmentRank
-                                                .selectedDepartment);
-                                            log(SelectDepartmentRank
-                                                .selectedRank);
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(SnackBar(
-                                                    content: Text(
-                                                        'Submitted your records successfully')));
-                                            _formKey.currentState.save();
-                                          } else {
-                                            setState(() {
-                                              _autoValidate = true;
-                                            });
-                                          }
-                                        },
-                                        child: Text('Submit'),
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  Colors.green),
+                                      AddressField(
+                                          autoValidate: _autoValidate,
+                                          addressController: addressController),
+                                      MobileNumberField(
+                                          autoValidate: _autoValidate,
+                                          phoneController: phoneController),
+                                      EmailField(
+                                          autoValidate: _autoValidate,
+                                          emailController: emailController),
+                                      NidField(
+                                          autoValidate: _autoValidate,
+                                          nidController: nidController),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: Container(
+                                          width: 89,
+                                          padding: EdgeInsets.only(top: 8.0),
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              if (_formKey.currentState
+                                                  .validate()) {
+                                                //log works only if all fields are validate. Fill all the required fields
+                                                log(nameController.text);
+                                                setState(() {
+                                                  nextPage = true;
+                                                });
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(SnackBar(
+                                                        content: Text(
+                                                            'Final steps')));
+                                                _formKey.currentState.save();
+                                              } else {
+                                                setState(() {
+                                                  _autoValidate = true;
+                                                });
+                                              }
+                                            },
+                                            child: Row(
+                                              children: [
+                                                Text('Next '),
+                                                Icon(Icons
+                                                    .arrow_forward_outlined)
+                                              ],
+                                            ),
+                                            style: ButtonStyle(
+                                              backgroundColor:
+                                                  MaterialStateProperty.all(
+                                                      Colors.green),
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ],
                                   )
-                                ],
-                              ),
-                            ),
-                    ),
-                  ),
+                                : Container(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SelectDepartmentRank(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 5.0, top: 15.0),
+                                              child: Text(
+                                                'Job Status',
+                                                style: textStyle,
+                                              ),
+                                            ),
+                                            SelectJobStatus(),
+                                          ],
+                                        ),
+                                        WorkPlace(
+                                            autoValidate: _autoValidate,
+                                            workPlaceController:
+                                                workPlaceController),
+                                        PasswordField(
+                                            autoValidate: _autoValidate,
+                                            passwordController:
+                                                passwordController),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  nextPage = false;
+                                                });
+                                              },
+                                              child: Row(
+                                                children: [
+                                                  Icon(Icons
+                                                      .arrow_back_outlined),
+                                                  Text(' Prev'),
+                                                ],
+                                              ),
+                                              style: ButtonStyle(
+                                                backgroundColor:
+                                                    MaterialStateProperty.all(
+                                                        Colors.green),
+                                              ),
+                                            ),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                if (_formKey.currentState
+                                                    .validate()) {
+                                                  //log works only if all fields are validate. Fill all the required fields
+                                                  log(nameController.text);
+                                                  log(SelectDepartmentRank
+                                                      .selectedDepartment);
+                                                  log(SelectDepartmentRank
+                                                      .selectedRank);
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(SnackBar(
+                                                          content: Text(
+                                                              'Submitted your records successfully')));
+                                                  _formKey.currentState.save();
+                                                } else {
+                                                  setState(() {
+                                                    _autoValidate = true;
+                                                  });
+                                                }
+                                              },
+                                              child: Text('Submit'),
+                                              style: ButtonStyle(
+                                                backgroundColor:
+                                                    MaterialStateProperty.all(
+                                                        Colors.green),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                          ),
+                        ),
                 ),
               ),
             ),
