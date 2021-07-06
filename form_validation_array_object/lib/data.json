@@ -1,0 +1,95 @@
+{
+    "prc_obj_test": [
+        {
+            "tcolm_name": "user_name",
+            "tblcolv_fg": 1,
+            "colcrud_fg": 1,
+            "colvchk_fg": 1,
+            "coment_txt": "done"
+        },
+        {
+            "tcolm_name": "user_age",
+            "tblcolv_fg": 1,
+            "colcrud_fg": 1,
+            "colvchk_fg": 1,
+            "coment_txt": "done"
+        },
+        {
+            "tcolm_name": "user_birth_day",
+            "tblcolv_fg": 1,
+            "colcrud_fg": 1,
+            "colvchk_fg": 1,
+            "coment_txt": "done"
+        },
+        {
+            "tcolm_name": "user_birth_month",
+            "tblcolv_fg": 1,
+            "colcrud_fg": 1,
+            "colvchk_fg": 1,
+            "coment_txt": "done"
+        },
+        {
+            "tcolm_name": "user_birth_year",
+            "tblcolv_fg": 1,
+            "colcrud_fg": 1,
+            "colvchk_fg": 1,
+            "coment_txt": "done"
+        },
+        {
+            "tcolm_name": "user_address",
+            "tblcolv_fg": 1,
+            "colcrud_fg": 1,
+            "colvchk_fg": 1,
+            "coment_txt": "done"
+        },
+        {
+            "tcolm_name": "user_password",
+            "tblcolv_fg": 1,
+            "colcrud_fg": 1,
+            "colvchk_fg": 1,
+            "coment_txt": "done"
+        },
+        {
+            "tcolm_name": "user_nid",
+            "tblcolv_fg": 1,
+            "colcrud_fg": 1,
+            "colvchk_fg": 1,
+            "coment_txt": "done"
+        },
+        {
+            "tcolm_name": "user_department",
+            "tblcolv_fg": 1,
+            "colcrud_fg": 1,
+            "colvchk_fg": 1,
+            "coment_txt": "done"
+        },
+        {
+            "tcolm_name": "user_rank",
+            "tblcolv_fg": 1,
+            "colcrud_fg": 1,
+            "colvchk_fg": 1,
+            "coment_txt": "done"
+        },
+        {
+            "tcolm_name": "user_job_status",
+            "tblcolv_fg": 1,
+            "colcrud_fg": 1,
+            "colvchk_fg": 1,
+            "coment_txt": "done"
+        },
+        {
+            "tcolm_name": "user_workspace",
+            "tblcolv_fg": 1,
+            "colcrud_fg": 1,
+            "colvchk_fg": 1,
+            "coment_txt": "done"
+        },
+        {
+            "tcolm_name": "user_email",
+            "tblcolv_fg": 1,
+            "colcrud_fg": 1,
+            "colvchk_fg": 1,
+            "coment_txt": "done"
+        }
+    ]
+}
