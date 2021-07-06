@@ -1,0 +1,142 @@
+[
+  {
+    "formName": "user_form",
+    "filedName": "User name",
+    "fuid": "FNM01",
+    "iSEnable": 1,
+    "isVisible": 1,
+    "isNeedValidation": 1,
+    "Remarks": "aaaaa",
+    "isActive": 1
+  },
+  {
+    "formName": "user_form",
+    "filedName": "User age",
+    "fuid": "FNM02",
+    "iSEnable": 1,
+    "isVisible": 1,
+    "isNeedValidation": 1,
+    "Remarks": "aaaaa",
+    "isActive": 1
+  },
+  {
+    "formName": "user_form",
+    "filedName": "User birth_day",
+    "fuid": "FNM03",
+    "iSEnable": 1,
+    "isVisible": 1,
+    "isNeedValidation": 1,
+    "Remarks": "aaaaa",
+    "isActive": 1
+  },
+  {
+    "formName": "user_form",
+    "filedName": "User birth_month",
+    "fuid": "FNM04",
+    "iSEnable": 1,
+    "isVisible": 1,
+    "isNeedValidation": 1,
+    "Remarks": "aaaaa",
+    "isActive": 1
+  },
+  {
+    "formName": "user_form",
+    "filedName": "User birth_year",
+    "fuid": "FNM05",
+    "iSEnable": 1,
+    "isVisible": 1,
+    "isNeedValidation": 1,
+    "Remarks": "aaaaa",
+    "isActive": 1
+  },
+  {
+    "formName": "user_form",
+    "filedName": "User address",
+    "fuid": "FNM06",
+    "iSEnable": 1,
+    "isVisible": 1,
+    "isNeedValidation": 1,
+    "Remarks": "aaaaa",
+    "isActive": 1
+  },
+  {
+    "formName": "user_form",
+    "filedName": "User mobile",
+    "fuid": "FNM07",
+    "iSEnable": 1,
+    "isVisible": 1,
+    "isNeedValidation": 1,
+    "Remarks": "aaaaa",
+    "isActive": 1
+  },
+  {
+    "formName": "user_form",
+    "filedName": "User email",
+    "fuid": "FNM08",
+    "iSEnable": 1,
+    "isVisible": 1,
+    "isNeedValidation": 1,
+    "Remarks": "aaaaa",
+    "isActive": 1
+  },
+  {
+    "formName": "user_form",
+    "filedName": "User nid",
+    "fuid": "FNM09",
+    "iSEnable": 1,
+    "isVisible": 1,
+    "isNeedValidation": 1,
+    "Remarks": "aaaaa",
+    "isActive": 1
+  },
+  {
+    "formName": "user_form",
+    "filedName": "User department",
+    "fuid": "FNM10",
+    "iSEnable": 1,
+    "isVisible": 1,
+    "isNeedValidation": 1,
+    "Remarks": "aaaaa",
+    "isActive": 1
+  },
+  {
+    "formName": "user_form",
+    "filedName": "User rank",
+    "fuid": "FNM11",
+    "iSEnable": 1,
+    "isVisible": 1,
+    "isNeedValidation": 1,
+    "Remarks": "aaaaa",
+    "isActive": 1
+  },
+  {
+    "formName": "user_form",
+    "filedName": "User job_status",
+    "fuid": "FNM12",
+    "iSEnable": 1,
+    "isVisible": 1,
+    "isNeedValidation": 1,
+    "Remarks": "aaaaa",
+    "isActive": 1
+  },
+  {
+    "formName": "user_form",
+    "filedName": "User workplace",
+    "fuid": "FNM013",
+    "iSEnable": 1,
+    "isVisible": 1,
+    "isNeedValidation": 1,
+    "Remarks": "aaaaa",
+    "isActive": 1
+  },
+  {
+    "formName": "user_form",
+    "filedName": "User password",
+    "fuid": "FNM14",
+    "iSEnable": 1,
+    "isVisible": 1,
+    "isNeedValidation": 1,
+    "Remarks": "aaaaa",
+    "isActive": 1
+  }
+]
