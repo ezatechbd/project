@@ -1,56 +1,59 @@
 import 'package:flutter/material.dart';
 
 class SelectBloodGroup extends StatefulWidget {
-  static String dropdownValue = 'Select';
+  final Map projectListdropdown;
+  static Map mySelection;
+  const SelectBloodGroup({
+    Key key,
+    @required this.projectListdropdown,
+  }) : super(key: key);
+
   @override
   _SelectBloodGroupState createState() => _SelectBloodGroupState();
 }
 
 class _SelectBloodGroupState extends State<SelectBloodGroup> {
-  List<String> listValue = [
-    'Select',
-    'A+',
-    'A-',
-    'B+',
-    'B-',
-    'AB+',
-    'AB-',
-    'O+',
-    'O-',
-  ];
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.only(left: 5.0),
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.black.withOpacity(0.4)),
-            borderRadius: BorderRadius.all(Radius.circular(5))),
-        child: DropdownButton<String>(
-          isExpanded: false,
-          value: SelectBloodGroup.dropdownValue,
-          icon: Icon(Icons.arrow_drop_down),
-          iconSize: 30, //this inicrease the size
-          elevation: 16,
-          style: TextStyle(color: Colors.black),
-          // this is for underline
-          // to give an underline us this in your underline inspite of Container
-          //       Container(
-          //         height: 2,
-          //         color: Colors.grey,
-          //       )
-          underline: Container(),
-          onChanged: (String newValue) {
-            setState(() {
-              SelectBloodGroup.dropdownValue = newValue;
-            });
-            print(SelectBloodGroup.dropdownValue);
-          },
-          items: listValue.map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
+      width: 90,
+      // padding: EdgeInsets.only(left: 5.0),
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.black.withOpacity(0.4)),
+          borderRadius: BorderRadius.all(Radius.circular(5))),
+      child: DropdownButtonFormField(
+        // underline: SizedBox(),
+        // searchHint: 'Select Project',
+        hint: Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Text("Select"),
+        ),
+        isExpanded: true,
+        items: widget.projectListdropdown['blood']
+            .map<DropdownMenuItem<Map>>((item) {
+          return new DropdownMenuItem<Map>(
+            value: item,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: new Text(
+                item["b_name"].toString(),
+              ),
+            ),
+          );
+        }).toList(),
+        onChanged: (newVal) {
+          setState(() {
+            SelectBloodGroup.mySelection = newVal == null ? {} : newVal;
+            print(
+              SelectBloodGroup.mySelection.toString(),
+              // SelectBloodGroup.mySelection['PROJT_NAME']
+              //     .toString(),
             );
-          }).toList(),
-        ));
+          });
+        },
+        validator: (newVal) => newVal == null ? ' * required' : null,
+        value: SelectBloodGroup.mySelection,
+      ),
+    );
   }
 }

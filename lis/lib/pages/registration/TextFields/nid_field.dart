@@ -22,7 +22,7 @@ class NidField extends StatelessWidget {
         onFieldSubmitted: (String value) {
           nidController.text = value;
         },
-        validator: (value) => value.isEmpty ? 'NID is required' : null,
+        validator: (value) => value.isEmpty ? '* required' : null,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           labelText: 'Enter your NID number',

@@ -1,11 +1,11 @@
 import 'package:ati_lis/config/common_const.dart';
 import 'package:ati_lis/custom/drawer/side_menu.dart';
 import 'package:ati_lis/pages/home/home_page.dart';
-import 'package:ati_lis/pages/login/login_page.dart';
+// import 'package:ati_lis/pages/login/login_page.dart';
 import 'package:ati_lis/pages/profile/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 class DrawerMenu extends StatelessWidget {
   @override
@@ -78,16 +78,17 @@ class DrawerMenu extends StatelessWidget {
                     icon: FontAwesomeIcons.signOutAlt,
                     text: 'Logout',
                     onTap: () async {
-                      SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                      prefs.remove('email');
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext ctx) => LoginPage(),
-                        ),
-                      );
-                      //Navigator.of(context).pop();
+                      // SharedPreferences prefs =
+                      //     await SharedPreferences.getInstance();
+                      // prefs.remove('email');
+                      // prefs.remove('saveUser');
+                      // Navigator.pushReplacement(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (BuildContext ctx) => LoginPage(),
+                      //   ),
+                      // );
+                      Navigator.of(context).pop();
                     },
                   ),
                 ],

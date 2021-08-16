@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class SelectBirthYear extends StatefulWidget {
-  static String dropdownValue = 'Year';
+class SelectBirthDay extends StatefulWidget {
+  static String dropdownValue;
   @override
-  _SelectBirthYearState createState() => _SelectBirthYearState();
+  _SelectBirthDayState createState() => _SelectBirthDayState();
 }
 
-class _SelectBirthYearState extends State<SelectBirthYear> {
-  List<String> listValue = ['Year'];
+class _SelectBirthDayState extends State<SelectBirthDay> {
+  List<String> listValue = [];
   var now = new DateTime.now();
   @override
   void initState() {
-    for (int i = 1905; i < (now.year + 1); i++) {
+    for (int i = 1; i < 32; i++) {
       listValue.add(i.toString());
     }
     super.initState();
@@ -20,34 +20,35 @@ class _SelectBirthYearState extends State<SelectBirthYear> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.only(left: 5.0),
+        width: 90,
         decoration: BoxDecoration(
             border: Border.all(color: Colors.black.withOpacity(0.4)),
             borderRadius: BorderRadius.all(Radius.circular(5))),
-        child: DropdownButton<String>(
-          isExpanded: false,
-          value: SelectBirthYear.dropdownValue,
+        child: DropdownButtonFormField<String>(
+          isExpanded: true,
+          hint: Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text("Day"),
+          ),
+          value: SelectBirthDay.dropdownValue,
           icon: Icon(Icons.arrow_drop_down),
           iconSize: 30, //this inicrease the size
           elevation: 16,
           style: TextStyle(color: Colors.black),
-          // this is for underline
-          // to give an underline us this in your underline inspite of Container
-          //       Container(
-          //         height: 2,
-          //         color: Colors.grey,
-          //       )
-          underline: Container(),
+          validator: (newVal) => newVal == null ? ' * required' : null,
           onChanged: (String newValue) {
             setState(() {
-              SelectBirthYear.dropdownValue = newValue;
+              SelectBirthDay.dropdownValue = newValue;
             });
-            print(SelectBirthYear.dropdownValue);
+            print(SelectBirthDay.dropdownValue);
           },
           items: listValue.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,
-              child: Text(value),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(value),
+              ),
             );
           }).toList(),
         ));

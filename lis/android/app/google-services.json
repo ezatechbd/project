@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "343827008276",
+    "project_id": "ati-meditop",
+    "storage_bucket": "ati-meditop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:343827008276:android:e3893202b62db8b457d001",
+        "android_client_info": {
+          "package_name": "com.example.ati_lis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "343827008276-mkf2dkug587tbj3n16b13hutao913uge.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_bNDl9HsRLqDuyAGqKrfHs4CjdA252A0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "343827008276-mkf2dkug587tbj3n16b13hutao913uge.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

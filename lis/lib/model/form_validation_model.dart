@@ -1,44 +1,55 @@
+import 'dart:convert';
+
+FormValidation formValidationFromJson(String str) =>
+    FormValidation.fromJson(json.decode(str));
+
+String formValidationToJson(FormValidation data) => json.encode(data.toJson());
+
 class FormValidation {
-  String formName;
-  String filedName;
-  String fuid;
-  int iSEnable;
-  int isVisible;
-  int isNeedValidation;
-  String remarks;
-  int isActive;
+  FormValidation({
+    this.prcObjTest,
+  });
 
-  FormValidation(
-      {this.formName,
-      this.filedName,
-      this.fuid,
-      this.iSEnable,
-      this.isVisible,
-      this.isNeedValidation,
-      this.remarks,
-      this.isActive});
+  List<PrcObjTest> prcObjTest;
 
-  FormValidation.fromJson(Map<String, dynamic> json) {
-    formName = json['formName'];
-    filedName = json['filedName'];
-    fuid = json['fuid'];
-    iSEnable = json['iSEnable'];
-    isVisible = json['isVisible'];
-    isNeedValidation = json['isNeedValidation'];
-    remarks = json['Remarks'];
-    isActive = json['isActive'];
-  }
+  factory FormValidation.fromJson(Map<String, dynamic> json) => FormValidation(
+        prcObjTest: List<PrcObjTest>.from(
+            json["prc_obj_test"].map((x) => PrcObjTest.fromJson(x))),
+      );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['formName'] = this.formName;
-    data['filedName'] = this.filedName;
-    data['fuid'] = this.fuid;
-    data['iSEnable'] = this.iSEnable;
-    data['isVisible'] = this.isVisible;
-    data['isNeedValidation'] = this.isNeedValidation;
-    data['Remarks'] = this.remarks;
-    data['isActive'] = this.isActive;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        "prc_obj_test": List<dynamic>.from(prcObjTest.map((x) => x.toJson())),
+      };
+}
+
+class PrcObjTest {
+  PrcObjTest({
+    this.tcolmName,
+    this.tblcolvFg,
+    this.colcrudFg,
+    this.colvchkFg,
+    this.comentTxt,
+  });
+
+  String tcolmName;
+  int tblcolvFg;
+  int colcrudFg;
+  int colvchkFg;
+  String comentTxt;
+
+  factory PrcObjTest.fromJson(Map<String, dynamic> json) => PrcObjTest(
+        tcolmName: json["tcolm_name"],
+        tblcolvFg: json["tblcolv_fg"],
+        colcrudFg: json["colcrud_fg"],
+        colvchkFg: json["colvchk_fg"],
+        comentTxt: json["coment_txt"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "tcolm_name": tcolmName,
+        "tblcolv_fg": tblcolvFg,
+        "colcrud_fg": colcrudFg,
+        "colvchk_fg": colvchkFg,
+        "coment_txt": comentTxt,
+      };
 }

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class WorkPlace extends StatelessWidget {
-  const WorkPlace({
+class PersonalID extends StatelessWidget {
+  const PersonalID({
     Key key,
     @required bool autoValidate,
-    @required this.workPlaceController,
+    @required this.pIDController,
   })  : _autoValidate = autoValidate,
         super(key: key);
 
   final bool _autoValidate;
-  final TextEditingController workPlaceController;
+  final TextEditingController pIDController;
 
   @override
   Widget build(BuildContext context) {
@@ -17,16 +17,22 @@ class WorkPlace extends StatelessWidget {
       height: _autoValidate == false ? 55 : 70,
       padding: EdgeInsets.only(top: 10),
       child: TextFormField(
-        controller: workPlaceController,
+        controller: pIDController,
         onFieldSubmitted: (String value) {
-          workPlaceController.text = value;
+          pIDController.text = value;
         },
-        validator: (value) => value.isEmpty ? '* required' : null,
+        validator: (value) => value.isEmpty
+            ? '* required'
+            : (value.toUpperCase() != 'BA' &&
+                    value.toUpperCase() != 'BN' &&
+                    value.toUpperCase() != 'BAF')
+                ? 'Enter valid ID'
+                : null,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
-          labelText: 'Enter your current work unit',
+          labelText: 'Enter your personal ID',
           prefixIcon: Icon(
-            Icons.person,
+            Icons.format_list_numbered_sharp,
             color: Colors.black.withOpacity(0.4),
           ),
         ),

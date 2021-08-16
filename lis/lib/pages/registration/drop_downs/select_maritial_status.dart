@@ -1,52 +1,59 @@
 import 'package:flutter/material.dart';
 
 class SelectMaritialStatus extends StatefulWidget {
-  static String dropdownValue = 'Select';
+  final Map projectListdropdown;
+  static Map mySelection;
+  const SelectMaritialStatus({
+    Key key,
+    @required this.projectListdropdown,
+  }) : super(key: key);
+
   @override
   _SelectMaritialStatusState createState() => _SelectMaritialStatusState();
 }
 
 class _SelectMaritialStatusState extends State<SelectMaritialStatus> {
-  List<String> listValue = [
-    'Select',
-    'Single',
-    'Married',
-    'Widowed',
-    'Divorced',
-  ];
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.only(left: 5.0),
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.black.withOpacity(0.4)),
-            borderRadius: BorderRadius.all(Radius.circular(5))),
-        child: DropdownButton<String>(
-          isExpanded: false,
-          value: SelectMaritialStatus.dropdownValue,
-          icon: Icon(Icons.arrow_drop_down),
-          iconSize: 30, //this inicrease the size
-          elevation: 16,
-          style: TextStyle(color: Colors.black),
-          // this is for underline
-          // to give an underline us this in your underline inspite of Container
-          //       Container(
-          //         height: 2,
-          //         color: Colors.grey,
-          //       )
-          underline: Container(),
-          onChanged: (String newValue) {
-            setState(() {
-              SelectMaritialStatus.dropdownValue = newValue;
-            });
-            print(SelectMaritialStatus.dropdownValue);
-          },
-          items: listValue.map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
+      width: 90,
+      // padding: EdgeInsets.only(left: 5.0),
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.black.withOpacity(0.4)),
+          borderRadius: BorderRadius.all(Radius.circular(5))),
+      child: DropdownButtonFormField(
+        // underline: SizedBox(),
+        // searchHint: 'Select Project',
+        hint: Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Text("Select"),
+        ),
+        isExpanded: true,
+        items: widget.projectListdropdown['marital']
+            .map<DropdownMenuItem<Map>>((item) {
+          return new DropdownMenuItem<Map>(
+            value: item,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: new Text(
+                item["m_name"].toString(),
+              ),
+            ),
+          );
+        }).toList(),
+        onChanged: (newVal) {
+          setState(() {
+            SelectMaritialStatus.mySelection = newVal == null ? {} : newVal;
+            print(
+              SelectMaritialStatus.mySelection.toString(),
+              // SelectMaritialStatus.mySelection['PROJT_NAME']
+              //     .toString(),
             );
-          }).toList(),
-        ));
+          });
+        },
+        validator: (newVal) => newVal == null ? ' * required' : null,
+        value: SelectMaritialStatus.mySelection,
+      ),
+    );
   }
 }

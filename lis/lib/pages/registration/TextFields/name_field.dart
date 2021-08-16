@@ -21,7 +21,7 @@ class NameField extends StatelessWidget {
         onFieldSubmitted: (String value) {
           nameController.text = value;
         },
-        validator: (value) => value.isEmpty ? 'Name is required' : null,
+        validator: (value) => value.isEmpty ? '* required' : null,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           labelText: 'Enter your name',

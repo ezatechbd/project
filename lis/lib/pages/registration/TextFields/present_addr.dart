@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class AgeField extends StatelessWidget {
-  const AgeField({
+class PresentAddress extends StatelessWidget {
+  const PresentAddress({
     Key key,
     @required bool autoValidate,
-    @required this.ageController,
+    @required this.presentAddrController,
   })  : _autoValidate = autoValidate,
         super(key: key);
 
   final bool _autoValidate;
-  final TextEditingController ageController;
+  final TextEditingController presentAddrController;
 
   @override
   Widget build(BuildContext context) {
@@ -17,15 +17,18 @@ class AgeField extends StatelessWidget {
       height: _autoValidate == false ? 55 : 70,
       padding: EdgeInsets.only(top: 10),
       child: TextFormField(
-        controller: ageController,
-        keyboardType: TextInputType.number,
+        controller: presentAddrController,
         onFieldSubmitted: (String value) {
-          ageController.text = value;
+          presentAddrController.text = value;
         },
-        validator: (value) => value.isEmpty ? 'Age is required' : null,
+        validator: (value) => value.isEmpty ? '* required' : null,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
-          labelText: 'Enter your age',
+          labelText: 'Enter your present address',
+          // prefixIcon: Icon(
+          //   Icons.format_list_numbered_sharp,
+          //   color: Colors.black.withOpacity(0.4),
+          // ),
         ),
       ),
     );
