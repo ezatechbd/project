@@ -1,7 +1,7 @@
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
-
-import 'fcm_utils.dart';
+import 'package:flutter_scheduler/service/notification_service.dart';
+import 'package:flutter_scheduler/utils/sp_utils.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -9,10 +9,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final TextEditingController titleController = new TextEditingController();
+  final TextEditingController descriptionController =
+      new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        brightness: Brightness.dark,
         title: Text('Alarm Manager'),
       ),
       body: Center(
@@ -21,6 +25,34 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Column(
               children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: titleController,
+                    decoration: new InputDecoration(
+                      hintText: 'Notification title',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: descriptionController,
+                    decoration: new InputDecoration(
+                      hintText: 'Notification description',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    SharedPref().setTitle(titleController.text ?? '');
+                    SharedPref()
+                        .setDescription(descriptionController.text ?? '');
+                  },
+                  child: Text('Set Task   '),
+                ),
                 ElevatedButton(
                   onPressed: () async {
                     await AndroidAlarmManager.periodic(
@@ -39,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     print(
                         '::::::::::::::::::Alarm Timer Canceled::::::::::::::::::');
                   },
-                  child: Text('End Task'),
+                  child: Text('End Task  '),
                 ),
               ],
             ),
