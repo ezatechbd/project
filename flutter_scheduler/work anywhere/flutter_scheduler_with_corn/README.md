@@ -1,16 +1,37 @@
 # flutter_scheduler
 
-A new Flutter project.
+Schedule local notification to a specific time with corn expression 
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+**step 01:** After importing [android_alarm_manager_plus](https://pub.dev/packages/android_alarm_manager_plus) to your project as usual, add the following to your AndroidManifest.xml within the <manifest></manifest> tags:
 
-A few resources to get you started if this is your first Flutter project:
+```
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+<uses-permission android:name="android.permission.WAKE_LOCK"/>
+```
+**step 02:** Next, within the ```<application> </application>``` tags, add:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+```
+<service
+    android:name="dev.fluttercommunity.plus.androidalarmmanager.AlarmService"
+    android:permission="android.permission.BIND_JOB_SERVICE"
+    android:exported="false"/>
+<receiver
+    android:name="dev.fluttercommunity.plus.androidalarmmanager.AlarmBroadcastReceiver"
+    android:exported="false"/>
+<receiver
+    android:name="dev.fluttercommunity.plus.androidalarmmanager.RebootBroadcastReceiver"
+    android:enabled="false"
+    android:exported="false">
+    <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+    </intent-filter>
+</receiver>
+```
+**step 03:** Next, within the ```<application></application>``` tags, after **android:label** add:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```
+android:name="io.flutter.app.FlutterApplication"
+```
+## step 03 is very important. Without this your apps will works fine when it is running but in the background mode apps will be forced stopped and notification will not working.  
